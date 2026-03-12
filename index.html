@@ -1,120 +1,147 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Login</title>
 
 <style>
 
 body{
 margin:0;
-padding:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
 background:#8b0000;
-font-family:Arial;
+font-family:Myanmar Text;
 color:white;
-}
-
-.login-box{
-width:320px;
-background:#6b0000;
-padding:25px;
-border-radius:10px;
 text-align:center;
 }
 
-h2{
-margin-bottom:20px;
+.banner img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.container{
+padding:20px;
 }
 
 input{
-width:100%;
-padding:10px;
-margin:8px 0;
+width:90%;
+padding:14px;
+margin:10px 0;
 border:none;
-border-radius:5px;
+border-radius:10px;
+background:#a33;
+color:white;
+font-size:16px;
 }
 
-button{
-width:100%;
-padding:10px;
-background:gold;
-border:none;
-border-radius:5px;
-font-weight:bold;
+.password-box{
+position:relative;
+}
+
+.eye{
+position:absolute;
+right:8%;
+top:22px;
 cursor:pointer;
 }
 
 .captcha-area{
 display:flex;
-justify-content:space-between;
-align-items:center;
-margin:10px 0;
+justify-content:center;
+gap:8px;
+margin:15px 0;
 }
 
 .captcha{
-background:white;
+width:40px;
+height:40px;
+background:#e6c27a;
 color:black;
-padding:8px 15px;
-border-radius:5px;
 font-weight:bold;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:4px;
 }
 
 .refresh{
 cursor:pointer;
+margin-top:5px;
+}
+
+.login-btn{
+width:90%;
+padding:15px;
+background:#e6c27a;
+border:none;
+border-radius:10px;
 font-size:18px;
+font-weight:bold;
+cursor:pointer;
+color:black;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="banner">
+<img src="https://i.imgur.com/8Km9tLL.jpeg">
+</div>
+
+<div class="container">
 
 <h2>အကောင့်ထဲဝင်ရန်</h2>
 
-<input type="text" placeholder="Username">
+<input type="text" placeholder="အမည်ပြုအမည်">
 
-<input type="password" placeholder="Password">
-
-<div class="captcha-area">
-
-<div class="captcha" id="captcha"></div>
-
-<div class="refresh" onclick="createCaptcha()">🔄</div>
-
+<div class="password-box">
+<input type="password" id="pass" placeholder="စကားဝှက်">
+<span class="eye" onclick="toggle()">👁</span>
 </div>
 
-<input type="text" placeholder="Captcha code">
+<p>စကားဝှက်မေ့နေပါသလား?</p>
 
-<button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
+<div class="captcha-area">
+<div class="captcha" id="c1"></div>
+<div class="captcha" id="c2"></div>
+<div class="captcha" id="c3"></div>
+<div class="captcha" id="c4"></div>
+<div class="captcha" id="c5"></div>
+</div>
+
+<div class="refresh" onclick="createCaptcha()">🔄 captcha ပြောင်း</div>
+
+<input type="text" placeholder="အပေါ်ကဂဏန်းထည့်ပါ">
+
+<button class="login-btn">အကောင့်ထဲဝင်ရန်</button>
 
 </div>
 
 <script>
 
 function createCaptcha(){
+let n="0123456789";
 
-let num = Math.floor(1000 + Math.random() * 9000);
-
-document.getElementById("captcha").innerText = num;
-
+for(let i=1;i<=5;i++){
+document.getElementById("c"+i).innerText=
+n[Math.floor(Math.random()*10)];
+}
 }
 
 createCaptcha();
 
-function login(){
+function toggle(){
+let p=document.getElementById("pass");
 
-window.location.href="https://is.gd/shwecasino_com";
-
+if(p.type==="password"){
+p.type="text";
+}else{
+p.type="password";
+}
 }
 
 </script>
