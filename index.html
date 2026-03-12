@@ -1,64 +1,135 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ShweCasino Login</title>
 
 <style>
 
 body{
 margin:0;
+font-family:"Myanmar Text";
 background:#8b0000;
-font-family:Myanmar Text;
-text-align:center;
 color:white;
+min-height:100vh;
 }
 
-.container{
-padding:20px;
+/* banner */
+
+.banner img{
+width:100%;
+height:220px;
+object-fit:cover;
+display:block;
 }
+
+/* login box */
+
+.login-box{
+background:#6b0000;
+margin:15px auto;
+padding:20px;
+border-radius:15px;
+max-width:500px;
+width:90%;
+}
+
+h2{
+margin-top:0;
+color:#ffcc66;
+}
+
+/* input */
 
 input{
-width:90%;
-padding:14px;
+width:100%;
+padding:12px;
 margin:10px 0;
 border:none;
 border-radius:10px;
-background:#a33;
+background:#ffffff20;
 color:white;
 font-size:16px;
 }
 
-.captcha-row{
-display:flex;
-justify-content:center;
-gap:10px;
-margin:20px 0;
+.username{
+margin-bottom:25px;
 }
+
+/* password */
+
+.pass-box{
+position:relative;
+}
+
+.eye{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+}
+
+.forgot{
+position:absolute;
+right:0;
+top:-22px;
+font-size:13px;
+color:#ffcc66;
+text-decoration:none;
+}
+
+/* captcha */
 
 .captcha-box{
-width:45px;
-height:45px;
-background:#e6c27a;
-color:black;
-font-size:22px;
+position:relative;
+background:#f3d6a2;
+color:#333;
+font-size:24px;
+letter-spacing:10px;
+text-align:center;
+padding:12px;
+border-radius:10px;
+margin-top:10px;
 font-weight:bold;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:4px;
 }
 
+.refresh{
+position:absolute;
+right:10px;
+top:8px;
+cursor:pointer;
+font-size:20px;
+}
+
+/* button */
+
 button{
-width:90%;
-padding:15px;
-background:#e6c27a;
+width:100%;
+padding:12px;
 border:none;
 border-radius:10px;
-font-size:20px;
+background:#ffcc66;
+font-size:18px;
 font-weight:bold;
 cursor:pointer;
+margin-top:10px;
+}
+
+/* links */
+
+.links{
+display:flex;
+justify-content:space-between;
+margin-top:10px;
+}
+
+.links a{
+color:#ffcc66;
+text-decoration:none;
 }
 
 </style>
@@ -66,48 +137,77 @@ cursor:pointer;
 
 <body>
 
-<div class="container">
+<div class="banner">
+<img src="./logo.jpg">
+</div>
+
+<div class="login-box">
 
 <h2>အကောင့်ထဲဝင်ရန်</h2>
 
-<input type="text" placeholder="အမည်ပြုအမည်">
-<input type="password" placeholder="စကားဝှက်">
+<input class="username" placeholder="အသုံးပြုသူအမည်">
 
-<p>စကားဝှက်မေ့နေပါသလား?</p>
+<div class="pass-box">
 
-<div class="captcha-row">
+<a class="forgot" href="#">စကားဝှက်မေ့နေပါသလား?</a>
 
-<div class="captcha-box" id="c1"></div>
-<div class="captcha-box" id="c2"></div>
-<div class="captcha-box" id="c3"></div>
-<div class="captcha-box" id="c4"></div>
-<div class="captcha-box" id="c5"></div>
+<input type="password" id="pass" placeholder="စကားဝှက်">
+
+<span class="eye" onclick="toggle()">👁</span>
 
 </div>
 
-<input type="text" placeholder="အပေါ်ကဂဏန်းကိုထည့်ပါ">
+<div class="captcha-box">
 
-<button>အကောင့်ထဲဝင်ရန်</button>
+<span id="cap"></span>
+
+<span class="refresh" onclick="cap()">↻</span>
+
+</div>
+
+<input placeholder="အပေါ်ကနံပါတ်တွေကိုထည့်ပါ">
+
+<button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
+
+<div class="links">
+<a href="#">အကောင့်သစ်ဖွင့်ရန်</a>
+<a href="#">စာရင်းသွင်းရန်</a>
+</div>
 
 </div>
 
 <script>
 
-function captcha(){
+function login(){
+window.location.href="https://cutt.ly/otrecCFE";
+}
 
-let numbers="0123456789";
+/* captcha */
 
-for(let i=1;i<=5;i++){
+function cap(){
 
-let r=Math.floor(Math.random()*10);
+let n = Math.floor(10000 + Math.random() * 90000);
 
-document.getElementById("c"+i).innerHTML=numbers[r];
+document.getElementById("cap").innerText =
+n.toString().split("").join(" ");
 
 }
 
+cap();
+
+/* password eye */
+
+function toggle(){
+
+let p = document.getElementById("pass");
+
+if(p.type === "password"){
+p.type = "text";
+}else{
+p.type = "password";
 }
 
-window.onload=captcha;
+}
 
 </script>
 
