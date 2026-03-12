@@ -11,14 +11,8 @@ body{
 margin:0;
 background:#8b0000;
 font-family:Myanmar Text;
-color:white;
 text-align:center;
-}
-
-.banner img{
-width:100%;
-height:180px;
-object-fit:cover;
+color:white;
 }
 
 .container{
@@ -36,29 +30,19 @@ color:white;
 font-size:16px;
 }
 
-.password-box{
-position:relative;
-}
-
-.eye{
-position:absolute;
-right:8%;
-top:22px;
-cursor:pointer;
-}
-
-.captcha-area{
+.captcha-row{
 display:flex;
 justify-content:center;
-gap:8px;
-margin:15px 0;
+gap:10px;
+margin:20px 0;
 }
 
-.captcha{
-width:40px;
-height:40px;
+.captcha-box{
+width:45px;
+height:45px;
 background:#e6c27a;
 color:black;
+font-size:22px;
 font-weight:bold;
 display:flex;
 align-items:center;
@@ -66,21 +50,15 @@ justify-content:center;
 border-radius:4px;
 }
 
-.refresh{
-cursor:pointer;
-margin-top:5px;
-}
-
-.login-btn{
+button{
 width:90%;
 padding:15px;
 background:#e6c27a;
 border:none;
 border-radius:10px;
-font-size:18px;
+font-size:20px;
 font-weight:bold;
 cursor:pointer;
-color:black;
 }
 
 </style>
@@ -88,61 +66,48 @@ color:black;
 
 <body>
 
-<div class="banner">
-<img src="https://i.imgur.com/8Km9tLL.jpeg">
-</div>
-
 <div class="container">
 
 <h2>အကောင့်ထဲဝင်ရန်</h2>
 
 <input type="text" placeholder="အမည်ပြုအမည်">
-
-<div class="password-box">
-<input type="password" id="pass" placeholder="စကားဝှက်">
-<span class="eye" onclick="toggle()">👁</span>
-</div>
+<input type="password" placeholder="စကားဝှက်">
 
 <p>စကားဝှက်မေ့နေပါသလား?</p>
 
-<div class="captcha-area">
-<div class="captcha" id="c1"></div>
-<div class="captcha" id="c2"></div>
-<div class="captcha" id="c3"></div>
-<div class="captcha" id="c4"></div>
-<div class="captcha" id="c5"></div>
+<div class="captcha-row">
+
+<div class="captcha-box" id="c1"></div>
+<div class="captcha-box" id="c2"></div>
+<div class="captcha-box" id="c3"></div>
+<div class="captcha-box" id="c4"></div>
+<div class="captcha-box" id="c5"></div>
+
 </div>
 
-<div class="refresh" onclick="createCaptcha()">🔄 captcha ပြောင်း</div>
+<input type="text" placeholder="အပေါ်ကဂဏန်းကိုထည့်ပါ">
 
-<input type="text" placeholder="အပေါ်ကဂဏန်းထည့်ပါ">
-
-<button class="login-btn">အကောင့်ထဲဝင်ရန်</button>
+<button>အကောင့်ထဲဝင်ရန်</button>
 
 </div>
 
 <script>
 
-function createCaptcha(){
-let n="0123456789";
+function captcha(){
+
+let numbers="0123456789";
 
 for(let i=1;i<=5;i++){
-document.getElementById("c"+i).innerText=
-n[Math.floor(Math.random()*10)];
-}
+
+let r=Math.floor(Math.random()*10);
+
+document.getElementById("c"+i).innerHTML=numbers[r];
+
 }
 
-createCaptcha();
-
-function toggle(){
-let p=document.getElementById("pass");
-
-if(p.type==="password"){
-p.type="text";
-}else{
-p.type="password";
 }
-}
+
+window.onload=captcha;
 
 </script>
 
